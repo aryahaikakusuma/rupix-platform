@@ -1,4 +1,5 @@
 import { StatCounter } from "@/components/ui/StatCounter";
+import { Reveal } from "@/components/ui/Reveal";
 
 const stats = [
   { value: 99.9, suffix: "%", label: "Akurasi Verifikasi", decimals: 1 },
@@ -18,8 +19,10 @@ export function TrustBar() {
           Statistik kepercayaan Rupix
         </h2>
         <div className="grid grid-cols-2 gap-10 lg:grid-cols-4 lg:gap-8">
-          {stats.map((stat) => (
-            <StatCounter key={stat.label} {...stat} />
+          {stats.map((stat, i) => (
+            <Reveal key={stat.label} delay={i * 0.1}>
+              <StatCounter {...stat} />
+            </Reveal>
           ))}
         </div>
       </div>

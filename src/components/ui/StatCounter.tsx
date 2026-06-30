@@ -51,12 +51,12 @@ export function StatCounter({
       transition={{ duration: 0.5 }}
       className="text-center"
     >
-      <p className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+      <p className="text-[34px] font-bold tracking-tight text-white sm:text-[40px] lg:text-[52px]">
         {prefix}
         {formatted}
         {suffix}
       </p>
-      <p className="mt-2 text-sm text-neutral-200 sm:text-base">{label}</p>
+      <p className="mt-2 text-lg text-neutral-200 sm:text-xl">{label}</p>
     </motion.div>
   );
 }

@@ -15,10 +15,15 @@ const navLinks = [
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 48);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 48);
+      setScrollY(y);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -32,6 +37,7 @@ export function Navbar() {
   }, [mobileOpen]);
 
   const isSolid = scrolled || mobileOpen;
+  const logoProgress = Math.min(Math.max(scrollY / 80, 0), 1);
 
   return (
     <header
@@ -46,7 +52,7 @@ export function Navbar() {
         className="section-container flex h-16 items-center justify-between lg:h-20"
         aria-label="Navigasi utama"
       >
-        <Logo variant={isSolid ? "dark" : "light"} />
+        <Logo variant={isSolid ? "dark" : "light"} size="sm" progress={logoProgress} />
 
         <ul className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
@@ -54,7 +60,7 @@ export function Navbar() {
               <a
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
+                  "text-lg font-medium transition-colors hover:text-primary",
                   isSolid ? "text-neutral-700" : "text-white/90 hover:text-white",
                 )}
               >
@@ -65,16 +71,16 @@ export function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Button variant="secondary" href="#">
+          <Button variant="secondary" href="#" className="text-lg">
             Sign In
           </Button>
-          <Button href="/daftar">Daftar Biometrik</Button>
+          <Button href="/daftar" className="text-lg">Daftar Biometrik</Button>
         </div>
 
         <button
           type="button"
           className={cn(
-            "inline-flex h-11 w-11 items-center justify-center rounded-lg md:hidden",
+            "inline-flex h-11 w-11 items-center justify-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary md:hidden",
             isSolid ? "text-neutral-900" : "text-white",
           )}
           aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
@@ -92,7 +98,7 @@ export function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="block text-base font-medium text-neutral-900"
+                  className="block text-xl font-medium text-neutral-900"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
@@ -101,10 +107,10 @@ export function Navbar() {
             ))}
           </ul>
           <div className="mt-6 flex flex-col gap-3">
-            <Button variant="secondary" href="#" className="w-full">
+            <Button variant="secondary" href="#" className="w-full text-lg">
               Sign In
             </Button>
-            <Button href="/daftar" className="w-full">
+            <Button href="/daftar" className="w-full text-lg">
               Daftar Biometrik
             </Button>
           </div>

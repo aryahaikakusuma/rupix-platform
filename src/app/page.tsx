@@ -6,7 +6,6 @@ import { Features } from "@/components/sections/Features";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { UseCases } from "@/components/sections/UseCases";
 import { QrisComparison } from "@/components/sections/QrisComparison";
-import { CtaSection } from "@/components/sections/CtaSection";
 
 export default function HomePage() {
   return (
@@ -19,7 +18,6 @@ export default function HomePage() {
         <HowItWorks />
         <UseCases />
         <QrisComparison />
-        <CtaSection />
       </main>
       <Footer />
     </>

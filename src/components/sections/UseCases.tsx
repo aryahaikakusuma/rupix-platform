@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ShoppingBag, GraduationCap, Bus } from "lucide-react";
-import { Card } from "@/components/ui/Card";
+import { Reveal } from "@/components/ui/Reveal";
 
 const useCases = [
   {
@@ -28,42 +28,60 @@ const useCases = [
   },
 ];
 
+const headerVariants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const slideUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+};
+
 export function UseCases() {
   return (
-    <section className="bg-white py-20 lg:py-28" aria-labelledby="usecase-heading">
+    <section className="w-full overflow-x-hidden bg-white py-20 lg:py-28" aria-labelledby="usecase-heading">
       <div className="section-container">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+        <motion.div
+          variants={headerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          className="mx-auto max-w-2xl text-center"
+        >
+          <motion.p
+            variants={slideUp}
+            className="text-[26px] font-semibold uppercase tracking-wider text-primary"
+          >
             Use Case
-          </p>
-          <h2
+          </motion.p>
+          <motion.h2
+            variants={slideUp}
             id="usecase-heading"
-            className="mt-3 text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl"
+            className="mt-3 text-[42px] font-bold tracking-tight text-neutral-900 sm:text-[48px]"
           >
             Di Mana Rupix Bekerja
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-neutral-600">
+          </motion.h2>
+          <motion.p
+            variants={slideUp}
+            className="mt-4 text-[22px] leading-relaxed text-neutral-600"
+          >
             Dari belanja harian hingga perjalanan harian — Rupix hadir di
             skenario yang paling sering Anda temui.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="mt-14 -mx-4 overflow-x-auto px-4 pb-4 snap-x snap-mandatory scrollbar-hide sm:-mx-6 sm:px-6">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex gap-6"
-          >
+        <div className="mt-14">
+          <div className="flex flex-nowrap gap-6 overflow-x-auto pb-4 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {useCases.map((useCase, i) => (
-              <motion.div
+              <Reveal
                 key={useCase.title}
-                initial={{ opacity: 0, x: 24 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                delay={i * 0.1}
+                className="flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_30%] max-w-[450px] shrink-0"
               >
-                <Card variant="usecase" className="h-full">
+                <div className="flex min-w-0 flex-col rounded-[var(--radius-card)] border border-neutral-200/80 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md snap-start">
                   <div
                     className={`mb-5 flex h-40 items-center justify-center rounded-xl bg-gradient-to-br ${useCase.gradient}`}
                   >
@@ -72,16 +90,16 @@ export function UseCases() {
                       aria-hidden
                     />
                   </div>
-                  <h3 className="text-lg font-semibold text-neutral-900">
+                  <h3 className="text-[22px] font-semibold text-neutral-900">
                     {useCase.title}
                   </h3>
-                  <p className="mt-2 text-base leading-relaxed text-neutral-600">
+                  <p className="mt-2 text-xl leading-relaxed text-neutral-600">
                     {useCase.description}
                   </p>
-                </Card>
-              </motion.div>
+                </div>
+              </Reveal>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

@@ -56,7 +56,7 @@ export function Stepper({
 
             <div
               className={cn(
-                "flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors",
+                "flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-lg font-bold transition-colors",
                 isComplete && "bg-primary text-white",
                 isActive && "gradient-primary text-white ring-4 ring-primary/20",
                 !isComplete && !isActive && "border-2 border-neutral-200 bg-white text-neutral-400",
@@ -69,13 +69,13 @@ export function Stepper({
             <div className={cn(isVertical ? "pt-1" : "mt-4")}>
               <h3
                 className={cn(
-                  "font-semibold",
+                  "text-xl font-semibold",
                   isActive || isComplete ? "text-neutral-900" : "text-neutral-400",
                 )}
               >
                 {step.title}
               </h3>
-              <p className="mt-1 text-sm leading-relaxed text-neutral-600">
+              <p className="mt-1 text-lg leading-relaxed text-neutral-600">
                 {step.description}
               </p>
             </div>

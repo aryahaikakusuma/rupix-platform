@@ -1,8 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Fingerprint, Zap, Hand, Store } from "lucide-react";
-import { Card } from "@/components/ui/Card";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Fingerprint, Zap, Hand, Store, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
 
 const features = [
   {
@@ -31,17 +33,48 @@ const features = [
   },
 ];
 
-const container = {
+const headerVariants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
+  show: {
+    transition: { staggerChildren: 0.15 },
+  },
 };
 
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+const slideUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+};
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" as const } },
+  exit: { opacity: 0, y: -8, transition: { duration: 0.2 } },
 };
 
 export function Features() {
+  const [active, setActive] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const feature = features[active];
+
+  const startTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setActive((prev) => (prev + 1) % features.length);
+    }, 2500);
+  }, []);
+
+  useEffect(() => {
+    startTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [startTimer]);
+
+  const handleTabClick = (i: number) => {
+    setActive(i);
+    startTimer();
+  };
+
   return (
     <section
       id="tentang"
@@ -49,45 +82,99 @@ export function Features() {
       aria-labelledby="features-heading"
     >
       <div className="section-container">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-            Keunggulan Teknologi
-          </p>
-          <h2
-            id="features-heading"
-            className="mt-3 text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl"
-          >
-            Teknologi Biometrik Kelas Banking
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-neutral-600">
-            Rupix menggunakan palm vein recognition — standar keamanan yang sama
-            dengan sistem perbankan internasional.
-          </p>
-        </div>
-
         <motion.div
-          variants={container}
+          variants={headerVariants}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className="mt-14 grid gap-6 sm:grid-cols-2 lg:gap-8"
+          className="mx-auto max-w-2xl text-center"
         >
-          {features.map((feature) => (
-            <motion.div key={feature.title} variants={item}>
-              <Card className="h-full">
-                <div className="mb-4 inline-flex rounded-xl bg-primary/10 p-3 text-primary">
-                  <feature.icon className="h-6 w-6" aria-hidden />
+          <motion.p
+            variants={slideUp}
+            className="text-[26px] font-semibold uppercase tracking-wider text-primary"
+          >
+            Keunggulan Teknologi
+          </motion.p>
+          <motion.h2
+            variants={slideUp}
+            id="features-heading"
+            className="mt-3 text-[42px] font-bold tracking-tight text-neutral-900 sm:text-[48px]"
+          >
+            Teknologi Biometrik Kelas Banking
+          </motion.h2>
+          <motion.p
+            variants={slideUp}
+            className="mt-4 text-[22px] leading-relaxed text-neutral-600"
+          >
+            Rupix menggunakan palm vein recognition — standar keamanan yang sama
+            dengan sistem perbankan internasional.
+          </motion.p>
+        </motion.div>
+
+        <div className="mt-14 grid lg:grid-cols-[320px_1fr] lg:gap-12">
+          <Reveal delay={0.2} className="flex flex-col gap-0 rounded-2xl bg-neutral-100 lg:h-full">
+            <div
+              role="tablist"
+              aria-label="Fitur"
+              className="contents"
+            >
+              {features.map((f, i) => {
+                const isActive = i === active;
+                const Icon = f.icon;
+                return (
+                  <button
+                    key={f.title}
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => handleTabClick(i)}
+                    className={`flex flex-1 items-center gap-4 px-5 py-5 text-left transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset ${
+                      isActive
+                        ? "bg-neutral-900 text-white shadow-lg"
+                        : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                    } ${i === 0 ? "rounded-t-2xl" : ""} ${i === features.length - 1 ? "rounded-b-2xl" : ""}`}
+                  >
+                    <span
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${
+                        isActive ? "bg-white/15" : "bg-primary/10 text-primary"
+                      }`}
+                    >
+                      <Icon className="h-5 w-5" aria-hidden />
+                    </span>
+                    <span className="text-lg font-semibold">{f.title}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.3} className="mt-8 flex flex-col justify-center rounded-2xl bg-neutral-50 p-8 sm:p-10 lg:mt-0 lg:p-12">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                variants={fadeIn}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <div className="mb-6 inline-flex rounded-2xl bg-primary/10 p-4 text-primary">
+                  <feature.icon className="h-8 w-8" aria-hidden />
                 </div>
-                <h3 className="text-lg font-semibold text-neutral-900">
+                <h3 className="text-[28px] font-bold text-neutral-900 sm:text-[34px]">
                   {feature.title}
                 </h3>
-                <p className="mt-2 text-base leading-relaxed text-neutral-600">
+                <p className="mt-4 max-w-lg text-xl leading-relaxed text-neutral-600 sm:text-[22px]">
                   {feature.description}
                 </p>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
+                <div className="mt-8">
+                  <Button href="/daftar" className="px-8 py-3 text-xl">
+                    Pelajari Lebih Lanjut
+                    <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+                  </Button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

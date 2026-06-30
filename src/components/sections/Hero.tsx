@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
 
 export function Hero() {
   return (
@@ -26,45 +27,44 @@ export function Hero() {
       />
 
       <div className="section-container relative z-10 grid items-center gap-12 pb-20 pt-32 lg:grid-cols-2 lg:gap-16 lg:pb-28 lg:pt-40">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-        >
-          <div className="mb-6 flex flex-wrap gap-2">
-            <Badge className="border-white/20 bg-white/10 text-white">Tanpa Kartu</Badge>
-            <Badge className="border-white/20 bg-white/10 text-white">Tanpa HP</Badge>
-            <Badge className="border-white/20 bg-white/10 text-white">Tanpa Kontak</Badge>
-          </div>
+        <div>
+          <Reveal delay={0}>
+            <div className="mb-6 flex flex-wrap gap-2">
+              <Badge className="border-white/20 bg-white/10 text-white">Tanpa Kartu</Badge>
+              <Badge className="border-white/20 bg-white/10 text-white">Tanpa HP</Badge>
+              <Badge className="border-white/20 bg-white/10 text-white">Tanpa Kontak</Badge>
+            </div>
+          </Reveal>
 
-          <h1
-            id="hero-heading"
-            className="text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl"
-          >
-            Satu Telapak Tangan untuk Semua Transaksi
-          </h1>
+          <Reveal delay={0.1}>
+            <h1
+              id="hero-heading"
+              className="text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl"
+            >
+              Satu Telapak Tangan untuk Semua Transaksi
+            </h1>
+          </Reveal>
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl">
-            Verifikasi identitas dan bayar hanya dengan menunjukkan telapak tangan.
-            Tanpa kartu, tanpa smartphone, tanpa kontak fisik — cepat dan aman.
-          </p>
+          <Reveal delay={0.2}>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl">
+              Verifikasi identitas dan bayar hanya dengan menunjukkan telapak tangan.
+              Tanpa kartu, tanpa smartphone, tanpa kontak fisik — cepat dan aman.
+            </p>
+          </Reveal>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Button href="/daftar" className="text-base">
-              Daftar Sekarang
-            </Button>
-            <Button variant="outline" href="#cara-kerja" className="text-base">
-              Lihat Cara Kerja
-            </Button>
-          </div>
-        </motion.div>
+          <Reveal delay={0.3}>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <Button href="/daftar" className="text-base">
+                Daftar Sekarang
+              </Button>
+              <Button variant="outline" href="#cara-kerja" className="text-base">
+                Lihat Cara Kerja
+              </Button>
+            </div>
+          </Reveal>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="relative mx-auto w-full max-w-md lg:max-w-none"
-        >
+        <Reveal delay={0.15} className="relative mx-auto w-full max-w-md lg:max-w-none">
           <div className="relative aspect-square overflow-hidden rounded-[var(--radius-card)] border border-white/20 bg-white/5 shadow-2xl backdrop-blur-sm">
             <div className="absolute inset-0 flex items-center justify-center">
               <PalmScanIllustration />
@@ -83,7 +83,7 @@ export function Hero() {
           <p className="mt-4 text-center text-sm text-white/60">
             Simulasi scan telapak tangan — vein recognition aktif
           </p>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );

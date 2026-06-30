@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { Input, Select } from "@/components/ui/Input";
 import { Stepper } from "@/components/ui/Stepper";
+import { cn } from "@/lib/utils";
 
 const formSteps = [
   { title: "Data Diri", description: "Informasi kontak dan identitas" },
@@ -26,6 +27,23 @@ const paymentOptions = [
 export default function DaftarPage() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 48);
+      setScrollY(y);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const logoProgress = Math.min(Math.max(scrollY / 80, 0), 1);
+  const isSolid = scrolled;
+
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -48,12 +66,19 @@ export default function DaftarPage() {
   if (submitted) {
     return (
       <div className="flex min-h-screen flex-col bg-neutral-50">
-        <header className="border-b border-neutral-200 bg-white">
+        <header
+          className={cn(
+            "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+            isSolid
+              ? "border-b border-neutral-200/80 bg-white/95 shadow-sm backdrop-blur-md"
+              : "gradient-primary",
+          )}
+        >
           <div className="section-container flex h-16 items-center">
-            <Logo />
+            <Logo variant={isSolid ? "dark" : "light"} size="sm" progress={logoProgress} />
           </div>
         </header>
-        <main className="flex flex-1 items-center justify-center px-4 py-16">
+        <main className="flex flex-1 items-center justify-center px-4 pt-24 lg:pt-28">
           <div className="w-full max-w-md text-center">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
               <CheckCircle2 className="h-8 w-8" aria-hidden />
@@ -92,12 +117,22 @@ export default function DaftarPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-neutral-50">
-      <header className="border-b border-neutral-200 bg-white">
-        <div className="section-container flex h-16 items-center justify-between">
-          <Logo />
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+          isSolid
+            ? "border-b border-neutral-200/80 bg-white/95 shadow-sm backdrop-blur-md"
+            : "gradient-primary",
+        )}
+      >
+        <div className="section-container flex h-16 items-center justify-between lg:h-20">
+          <Logo variant={isSolid ? "dark" : "light"} size="sm" progress={logoProgress} />
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-600 hover:text-primary"
+            className={cn(
+              "inline-flex items-center gap-1.5 text-sm font-medium transition-colors",
+              isSolid ? "text-neutral-600 hover:text-primary" : "text-white/80 hover:text-white",
+            )}
           >
             <ArrowLeft className="h-4 w-4" aria-hidden />
             Beranda
@@ -105,7 +140,7 @@ export default function DaftarPage() {
         </div>
       </header>
 
-      <main className="section-container flex-1 py-10 lg:py-16">
+      <main className="section-container flex-1 py-10 pt-24 lg:py-16 lg:pt-28">
         <div className="mx-auto max-w-2xl">
           <h1 className="text-3xl font-bold tracking-tight text-neutral-900">
             Daftar Biometrik
