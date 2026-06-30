@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -36,5 +35,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 =======
-# rupix-web-app
->>>>>>> 39c79a43b7da010ea908771f45f93fc990eb391b
+# rupix-platform
+Identity-powered payment platform for seamless, secure, and scalable palm authentication.
+>>>>>>> 8475d0c7e32e5217990b3fa1311e4baca1c3ede6
