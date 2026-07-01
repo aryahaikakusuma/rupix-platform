@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { Fingerprint, Zap, Hand, Store, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
@@ -60,7 +60,7 @@ export function Features() {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
       setActive((prev) => (prev + 1) % features.length);
-    }, 2500);
+    }, 3200);
   }, []);
 
   useEffect(() => {
@@ -111,8 +111,9 @@ export function Features() {
           </motion.p>
         </motion.div>
 
-        <div className="mt-14 grid lg:grid-cols-[320px_1fr] lg:gap-12">
-          <Reveal delay={0.2} className="flex flex-col gap-0 rounded-2xl bg-neutral-100 lg:h-full">
+        <div className="mt-14 lg:grid lg:grid-cols-[320px_1fr] lg:gap-12">
+          {/* Desktop: vertical tab buttons (icon + title) */}
+          <Reveal delay={0.2} className="hidden lg:flex lg:flex-col lg:gap-0 lg:rounded-2xl lg:bg-neutral-100 lg:h-full">
             <div
               role="tablist"
               aria-label="Fitur"
@@ -147,32 +148,77 @@ export function Features() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.3} className="mt-8 flex flex-col justify-center rounded-2xl bg-neutral-50 p-8 sm:p-10 lg:mt-0 lg:p-12 lg:min-h-[440px]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                variants={fadeIn}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-              >
-                <div className="mb-6 inline-flex rounded-2xl bg-primary/10 p-4 text-primary">
-                  <feature.icon className="h-8 w-8" aria-hidden />
+          {/* Content panel + Mobile icon navigation */}
+          <Reveal delay={0.3} className="mt-8 lg:mt-0">
+            <div className="flex flex-col">
+              {/* Content panel */}
+              <div className="flex flex-col justify-center overflow-hidden rounded-2xl bg-neutral-50 p-8 sm:p-10 h-[480px] lg:p-12">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={active}
+                    variants={fadeIn}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                  >
+                    <div className="mb-6 inline-flex rounded-2xl bg-primary/10 p-4 text-primary">
+                      <feature.icon className="h-8 w-8" aria-hidden />
+                    </div>
+                    <h3 className="text-[28px] font-bold text-neutral-900 sm:text-[34px]">
+                      {feature.title}
+                    </h3>
+                    <p className="mt-4 max-w-lg text-xl leading-relaxed text-neutral-600 sm:text-[22px]">
+                      {feature.description}
+                    </p>
+                    <div className="mt-8">
+                      <Button href="/daftar" className="px-8 py-3 text-xl">
+                        Pelajari Lebih Lanjut
+                        <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
+                      </Button>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Mobile: icon-only tab navigation */}
+              <Reveal delay={0.4} className="mt-6 lg:hidden">
+                <div
+                  role="tablist"
+                  aria-label="Fitur"
+                  className="flex items-center divide-x divide-neutral-200 rounded-xl border border-neutral-200 bg-white p-1 shadow-sm"
+                >
+                  <LayoutGroup>
+                    {features.map((f, i) => {
+                      const isActive = i === active;
+                      const Icon = f.icon;
+                      return (
+                        <button
+                          key={f.title}
+                          role="tab"
+                          aria-selected={isActive}
+                          onClick={() => handleTabClick(i)}
+                          className="relative flex flex-1 items-center justify-center py-3 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset"
+                        >
+                          {isActive && (
+                            <motion.div
+                              layoutId="mobile-active-tab"
+                              className="absolute inset-0 mx-1 rounded-lg bg-neutral-900"
+                              transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                            />
+                          )}
+                          <span className="relative z-10">
+                            <Icon
+                              className={`h-5 w-5 ${isActive ? "text-white" : "text-neutral-400"}`}
+                              aria-hidden
+                            />
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </LayoutGroup>
                 </div>
-                <h3 className="text-[28px] font-bold text-neutral-900 sm:text-[34px]">
-                  {feature.title}
-                </h3>
-                <p className="mt-4 max-w-lg text-xl leading-relaxed text-neutral-600 sm:text-[22px]">
-                  {feature.description}
-                </p>
-                <div className="mt-8">
-                  <Button href="/daftar" className="px-8 py-3 text-xl">
-                    Pelajari Lebih Lanjut
-                    <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
-                  </Button>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+              </Reveal>
+            </div>
           </Reveal>
         </div>
       </div>

@@ -26,10 +26,10 @@ export function Hero() {
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-        className="absolute left-1/2 top-1/2 z-20 hidden w-[580px] -translate-x-1/2 -translate-y-1/2 rounded-[36px] border-2 border-white/50 bg-white/[0.02] shadow-[0_0_40px_rgba(255,255,255,0.12),inset_0_0_50px_rgba(255,255,255,0.04)] sm:w-[660px] lg:block xl:w-[800px]"
+        className="absolute left-1/2 top-1/2 z-[1] hidden w-[min(72vw,472px)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[36px] border-2 border-white/50 bg-white/[0.02] shadow-[0_0_40px_rgba(255,255,255,0.12),inset_0_0_50px_rgba(255,255,255,0.04)] sm:w-[min(62vw,552px)] lg:block xl:w-[min(55vw,672px)]"
         style={{ aspectRatio: "16 / 9" }}
       >
-        <div className="absolute bottom-5 right-5 flex items-center gap-3 rounded-xl bg-white/20 px-4 py-3.5 backdrop-blur-md">
+        <div className="absolute bottom-5 right-5 flex max-w-[calc(100%-2.5rem)] items-center gap-3 rounded-xl bg-white/20 px-4 py-3.5 backdrop-blur-md">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/15">
             <ShoppingBag className="h-5 w-5 text-white" aria-hidden />
           </div>
@@ -43,27 +43,26 @@ export function Hero() {
         </div>
       </motion.div>
 
-      <div className="section-container relative z-10 flex min-h-screen flex-col pb-12 pt-32 lg:pb-20 lg:pt-40">
+      <div className="section-container relative z-10 flex min-h-screen flex-col pb-16 pt-24 sm:pb-12 sm:pt-32 lg:grid lg:grid-cols-2 lg:items-start lg:gap-16 lg:pb-20 lg:pt-24">
         <motion.h1
           id="hero-heading"
           initial={{ opacity: 0, y: 36 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="self-start text-left max-w-2xl text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl text-balance"
+          className="max-w-2xl text-left text-[clamp(1.75rem,3.75vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-white text-balance [text-shadow:0_2px_12px_rgba(0,0,0,0.4)]"
         >
           Satu Telapak Tangan untuk Semua Transaksi
         </motion.h1>
 
-        <div className="mt-16 flex flex-col items-start gap-6 self-start lg:mt-auto lg:items-end lg:self-end lg:text-right">
+        <div className="mt-16 flex flex-col items-start gap-4 self-end lg:mt-0 lg:items-end lg:text-right">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="max-w-lg text-lg leading-relaxed text-white/85 sm:text-xl"
+            className="max-w-md text-[clamp(0.95rem,1.15vw,1.125rem)] leading-relaxed text-white/85 lg:max-w-[45%] xl:max-w-[55%] [text-shadow:0_2px_12px_rgba(0,0,0,0.4)]/"
           >
             Verifikasi identitas dan bayar hanya dengan menunjukkan telapak
-            tangan. Tanpa kartu, tanpa smartphone, tanpa kontak fisik — cepat
-            dan aman.
+            tangan. Tanpa kartu, tanpa smartphone, tanpa kontak fisik cepat dan aman.
           </motion.p>
 
           <motion.div

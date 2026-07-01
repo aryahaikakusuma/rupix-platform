@@ -42,7 +42,7 @@ export function Footer() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className="relative z-10 mx-auto max-w-6xl -translate-y-1/2 rounded-2xl bg-gradient-to-br from-neutral-800 to-neutral-900 px-8 py-12 shadow-xl sm:px-12 sm:py-14 lg:px-16 lg:py-16"
+          className="relative z-10 mx-auto max-w-6xl -translate-y-1/2 rounded-2xl bg-gradient-to-br from-neutral-800 to-neutral-900 px-8 py-4 shadow-xl sm:px-12 sm:py-14 lg:px-16 lg:py-16"
         >
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
             <h2 className="max-w-xl text-2xl font-bold leading-tight text-white sm:text-3xl lg:text-4xl">
@@ -66,7 +66,7 @@ export function Footer() {
           </div>
         </motion.div>
 
-        <div className="mt-12 lg:mt-16">
+        <div className="mt-2 lg:mt-16">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
             <div className="lg:col-span-1">
               <Logo variant="light" />

@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-01T13:06:00.000Z",
+  "title": "Design System: Rupix",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Signature Blue",
+        "canonical": "#5271FF",
+        "tonalRamp": ["#0F1A66", "#1A33CC", "#264DFF", "#5271FF", "#7A94FF", "#A3B7FF", "#CCD9FF", "#E6EDFF"]
+      },
+      "primary-light": {
+        "role": "primary",
+        "displayName": "Cyan Accent",
+        "canonical": "#38B6FF",
+        "tonalRamp": ["#0B3D66", "#137ACC", "#1AB8FF", "#38B6FF", "#66CCFF", "#99DDFF", "#BBEEFF", "#DDF6FF"]
+      },
+      "neutral-900": {
+        "role": "neutral",
+        "displayName": "Deep Navy",
+        "canonical": "#0F172A",
+        "tonalRamp": ["#020617", "#0F172A", "#1E293B", "#334155", "#475569", "#64748B", "#94A3B8", "#CBD5E1"]
+      },
+      "neutral-950": {
+        "role": "neutral",
+        "displayName": "Midnight",
+        "canonical": "#07112B",
+        "tonalRamp": ["#020617", "#07112B", "#0F1D3D", "#1A2B52", "#2A3D6B", "#3D5287", "#556BA5", "#7187C3"]
+      },
+      "neutral-200": {
+        "role": "neutral",
+        "displayName": "Cloud Gray",
+        "canonical": "#E5E7EB",
+        "tonalRamp": ["#D1D5DB", "#DCDEE3", "#E5E7EB", "#EBEDF0", "#F1F2F5", "#F7F8FA", "#FBFBFC", "#FFFFFF"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headings only. Large, bold, tight tracking." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles and feature headings." },
+      "body": { "displayName": "Body", "purpose": "Paragraph text, descriptions, long-form content." },
+      "label": { "displayName": "Label", "purpose": "Button text, form labels, badges, small UI." }
+    },
+    "shadows": [
+      { "name": "sm", "value": "0 1px 2px rgba(0,0,0,0.05)", "purpose": "Card rest state, navbar scroll state." },
+      { "name": "md", "value": "0 4px 6px rgba(0,0,0,0.07)", "purpose": "Card hover, interactive containers." },
+      { "name": "lg-cta", "value": "0 10px 15px rgba(82,113,255,0.25)", "purpose": "Primary CTA button glow." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0, 0, 0.2, 1)", "purpose": "Default easing for all entrances and state transitions." },
+      { "name": "duration-micro", "value": "200ms", "purpose": "Hover, focus, button state transitions." },
+      { "name": "duration-reveal", "value": "500ms", "purpose": "Scroll-triggered section reveals." },
+      { "name": "duration-hero", "value": "700-800ms", "purpose": "Hero entrance animation." },
+      { "name": "duration-countup", "value": "1800ms", "purpose": "StatCounter animated number." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main CTA. Uses brand gradient, white text, blue shadow glow.",
+      "html": "<button class=\"ds-btn-primary\">Daftar Sekarang</button>",
+      "css": ".ds-btn-primary { background: linear-gradient(135deg, #5271FF 0%, #38B6FF 100%); color: #fff; padding: 12px 32px; border: none; border-radius: 10px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 1rem; font-weight: 600; line-height: 1.5; cursor: pointer; transition: filter 0.2s, box-shadow 0.2s; box-shadow: 0 10px 15px rgba(82,113,255,0.25); } .ds-btn-primary:hover { filter: brightness(1.1); } .ds-btn-primary:focus-visible { outline: 2px solid #5271FF; outline-offset: 2px; } .ds-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Light background, dark text, subtle border. For paired actions.",
+      "html": "<button class=\"ds-btn-secondary\">Sign In</button>",
+      "css": ".ds-btn-secondary { background: #fff; color: #0F172A; padding: 10px 24px; border: 1px solid #E5E7EB; border-radius: 10px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 1rem; font-weight: 600; line-height: 1.5; cursor: pointer; transition: background 0.2s; } .ds-btn-secondary:hover { background: #F9FAFB; } .ds-btn-secondary:focus-visible { outline: 2px solid #0F172A; outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Transparent with white border. For dark backgrounds only.",
+      "html": "<button class=\"ds-btn-outline\">Pelajari</button>",
+      "css": ".ds-btn-outline { background: transparent; color: #fff; padding: 10px 24px; border: 2px solid rgba(255,255,255,0.3); border-radius: 10px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 1rem; font-weight: 600; line-height: 1.5; cursor: pointer; transition: background 0.2s; } .ds-btn-outline:hover { background: rgba(255,255,255,0.1); } .ds-btn-outline:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Content container with rounded corners, subtle border, light shadow.",
+      "html": "<div class=\"ds-card\"><h3 style=\"font-size:1.25rem;font-weight:700;margin:0 0 8px 0;color:#0F172A\">Judul Card</h3><p style=\"font-size:1rem;line-height:1.65;color:#475569;margin:0\">Deskripsi singkat tentang fitur atau use case.</p></div>",
+      "css": ".ds-card { background: #fff; border: 1px solid rgba(229,231,235,0.8); border-radius: 16px; padding: 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; } .ds-card:hover { box-shadow: 0 4px 6px rgba(0,0,0,0.07); }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Text input with 8px radius, neutral border, primary focus ring.",
+      "html": "<div style=\"font-family:'Plus Jakarta Sans',system-ui,sans-serif\"><label style=\"display:block;font-size:0.875rem;font-weight:600;color:#0F172A;margin-bottom:6px\">Nama Lengkap</label><input class=\"ds-input\" type=\"text\" placeholder=\"Masukkan nama Anda\" /></div>",
+      "css": ".ds-input { width: 100%; background: #fff; color: #0F172A; padding: 12px 16px; border: 1px solid #E5E7EB; border-radius: 8px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 1rem; line-height: 1.5; box-sizing: border-box; transition: border-color 0.2s, box-shadow 0.2s; } .ds-input::placeholder { color: #9CA3AF; } .ds-input:focus { border-color: #5271FF; outline: none; box-shadow: 0 0 0 3px rgba(82,113,255,0.2); }"
+    },
+    {
+      "name": "Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Small pill tag in primary tint. For feature labels without card context.",
+      "html": "<span class=\"ds-badge\">Tanpa Kartu</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 9999px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 0.75rem; font-weight: 500; color: #5271FF; background: rgba(82,113,255,0.05); border: 1px solid rgba(82,113,255,0.2); }"
+    },
+    {
+      "name": "Navbar Logo (dark)",
+      "kind": "custom",
+      "refersTo": "logo",
+      "description": "Logo in dark variant for light/solid backgrounds.",
+      "html": "<div style=\"display:flex;align-items:center;gap:4px;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-weight:700;font-size:1.5rem;color:#0F172A\"><svg width=\"32\" height=\"32\" viewBox=\"0 0 40 40\" fill=\"none\"><rect width=\"40\" height=\"40\" rx=\"10\" fill=\"url(#g)\"/><path d=\"M14 20c0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6-6-2.7-6-6z\" fill=\"#fff\" opacity=\"0.9\"/><defs><linearGradient id=\"g\" x1=\"0\" y1=\"0\" x2=\"40\" y2=\"40\"><stop stop-color=\"#5271FF\"/><stop offset=\"1\" stop-color=\"#38B6FF\"/></linearGradient></defs></svg><span>Rupix</span></div>"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Trusted Palm",
+    "overview": "Rupix speaks with banking-grade confidence without being cold or corporate. The system uses a bold blue-to-cyan gradient as its visual anchor — evoking technology, security, and the future of payments. Against dark hero backgrounds, bright gradient CTAs pull focus; against light surfaces, the neutral palette provides a calm, authoritative reading experience.\n\nEvery design decisions starts from one premise: this is about biometric security — people's hands, their identity, their money. The interface must feel as safe as a bank vault and as fast as a wave. No gimmicks, no playful excess, no decorative clutter that undermines trust.",
+    "keyCharacteristics": [
+      "Gradient-driven identity: primary blue (#5271FF → #38B6FF) is the signature finish",
+      "High-contrast, accessible at WCAG AA",
+      "Content-focused layouts with generous whitespace",
+      "Motion that enhances understanding, never for decoration",
+      "Indonesian-first: language, cultural cues, mobile-centric breakpoints"
+    ],
+    "rules": [
+      { "name": "The One Voice Rule", "body": "The brand gradient is used deliberately — hero background, primary CTAs — not as a decorative wash on every section. Its presence signals 'this is actionable.'", "section": "colors" },
+      { "name": "The Trust Contrast Rule", "body": "Body text never falls below WCAG AA 4.5:1. Gray-on-gray for body copy is strictly prohibited.", "section": "colors" },
+      { "name": "The Tight Tracking Ceiling", "body": "Display headings never go tighter than -0.03em letter-spacing. At -0.04em and below, the letters touch and read as cramped.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. Shadows appear only as a response to scroll state or hover interaction.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use the brand gradient on primary CTAs and key interactive elements — it signals 'this is the action.'",
+      "Do use generous whitespace between sections (80px+/5rem) to let content breathe.",
+      "Do keep body text at WCAG AA 4.5:1 contrast minimum — dark text on light backgrounds.",
+      "Do use `text-wrap: balance` on display headings for even line lengths.",
+      "Do support `prefers-reduced-motion` — provide instant transitions when animations are disabled.",
+      "Do design mobile-first with breakpoints at 640px, 768px, 1024px, 1280px."
+    ],
+    "donts": [
+      "Don't use gray text on colored backgrounds — use a darker shade of the background's own hue instead.",
+      "Don't use bounce or elastic easing — stick to `easeOut` for entrances and state transitions.",
+      "Don't use gradient text (`background-clip: text`) as decoration — use solid colors for readability.",
+      "Don't wrap everything in cards or nest cards inside cards — prefer full-bleed sections with clear typographic hierarchy.",
+      "Don't put an uppercase eyebrow ('PRODUK' / 'FITUR') above every section — choose a different cadence.",
+      "Don't use decorative animations (parallax, floating elements) that don't serve the user's understanding.",
+      "Don't use pure black (#000) or pure gray — always tint toward the brand's neutral hue.",
+      "Don't use glassmorphism as default — reserve frosted glass for specific contextual overlays."
+    ]
+  }
+}
