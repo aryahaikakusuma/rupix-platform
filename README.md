@@ -37,4 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 =======
 # rupix-platform
 Identity-powered payment platform for seamless, secure, and scalable palm authentication.
->>>>>>> 8475d0c7e32e5217990b3fa1311e4baca1c3ede6
+> 8475d0c7e32e5217990b3fa1311e4baca1c3ede6

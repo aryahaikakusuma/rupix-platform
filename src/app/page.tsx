@@ -5,7 +5,7 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { Features } from "@/components/sections/Features";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { UseCases } from "@/components/sections/UseCases";
-import { QrisComparison } from "@/components/sections/QrisComparison";
+import { FAQ } from "@/components/sections/FAQ";
 
 export default function HomePage() {
   return (
@@ -17,7 +17,7 @@ export default function HomePage() {
         <Features />
         <HowItWorks />
         <UseCases />
-        <QrisComparison />
+        <FAQ />
       </main>
       <Footer />
     </>

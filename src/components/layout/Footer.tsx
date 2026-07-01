@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import { motion } from "framer-motion";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
@@ -46,14 +47,17 @@ export function Footer() {
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
             <h2 className="max-w-xl text-2xl font-bold leading-tight text-white sm:text-3xl lg:text-4xl">
               {headingWords.map((word, i) => (
-                <span key={i} className="inline-block overflow-hidden align-top">
-                  <motion.span
-                    variants={wordReveal}
-                    className="inline-block"
-                  >
-                    {word}{i < headingWords.length - 1 ? "\u00A0" : ""}
-                  </motion.span>
-                </span>
+                <Fragment key={i}>
+                  {i === 2 && <span className="block w-full" />}
+                  <span className="inline-block overflow-hidden align-top">
+                    <motion.span
+                      variants={wordReveal}
+                      className="inline-block"
+                    >
+                      {word}{i < headingWords.length - 1 ? "\u00A0" : ""}
+                    </motion.span>
+                  </span>
+                </Fragment>
               ))}
             </h2>
             <Button href="/daftar" className="shrink-0 self-stretch px-10 py-5 text-lg sm:text-xl lg:text-2xl">

@@ -147,7 +147,7 @@ export function Features() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.3} className="mt-8 flex flex-col justify-center rounded-2xl bg-neutral-50 p-8 sm:p-10 lg:mt-0 lg:p-12">
+          <Reveal delay={0.3} className="mt-8 flex flex-col justify-center rounded-2xl bg-neutral-50 p-8 sm:p-10 lg:mt-0 lg:p-12 lg:min-h-[440px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}

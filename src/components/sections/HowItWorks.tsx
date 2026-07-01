@@ -3,25 +3,28 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
+import work1Img from "../../../public/work1.png";
+import work2Img from "../../../public/work2.png";
+import work3Img from "../../../public/work3.png";
 
 const steps = [
   {
     title: "Scan Telapak Tangan",
     description:
       "Daftarkan telapak tangan Anda sekali di device Rupix. Pola pembuluh darah unik disimpan dengan enkripsi end-to-end.",
-    image: "/work1.png",
+    image: work1Img,
   },
   {
     title: "Hubungkan Pembayaran",
     description:
       "Tautkan rekening bank, e-wallet, atau kartu debit sebagai metode pembayaran default Anda.",
-    image: "/work2.png",
+    image: work2Img,
   },
   {
     title: "Bayar dengan Telapak Tangan",
     description:
       "Di merchant partner, cukup tunjukkan telapak tangan ke sensor. Transaksi selesai dalam milidetik.",
-    image: "/work3.png",
+    image: work3Img,
   },
 ];
 
@@ -77,11 +80,12 @@ export function HowItWorks() {
         <div className="mt-14 grid gap-8 md:grid-cols-3">
           {steps.map((step, i) => (
             <Reveal key={step.title} delay={i * 0.1} className="flex">
-              <div className="flex w-full flex-col overflow-hidden rounded-2xl border border-neutral-200/80 bg-white shadow-sm">
+              <motion.div
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="flex w-full flex-col rounded-2xl border border-neutral-200/80 bg-white shadow-sm hover:shadow-xl hover:shadow-blue-700/30"
+              >
                 <div className="flex flex-1 flex-col p-6 pb-0">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full gradient-primary text-lg font-bold text-white shadow-md">
-                    {i + 1}
-                  </div>
                   <h3 className="text-xl font-bold text-neutral-900">
                     {step.title}
                   </h3>
@@ -89,7 +93,7 @@ export function HowItWorks() {
                     {step.description}
                   </p>
                 </div>
-                <div className="relative mt-6 h-52 w-full overflow-hidden">
+                <div className="relative mt-6 h-72 w-full overflow-hidden">
                   <Image
                     src={step.image}
                     alt={step.title}
@@ -98,7 +102,7 @@ export function HowItWorks() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
-              </div>
+              </motion.div>
             </Reveal>
           ))}
         </div>

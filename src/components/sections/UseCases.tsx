@@ -81,7 +81,7 @@ export function UseCases() {
                 delay={i * 0.1}
                 className="flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_30%] max-w-[450px] shrink-0"
               >
-                <div className="flex min-w-0 flex-col rounded-[var(--radius-card)] border border-neutral-200/80 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md snap-start">
+                <div className="flex min-w-0 flex-col rounded-[var(--radius-card)] border border-neutral-200/80 bg-white p-6 pb-12 shadow-sm mb-4 transition-shadow duration-200 hover:shadow-md snap-start">
                   <div
                     className={`mb-5 flex h-40 items-center justify-center rounded-xl bg-gradient-to-br ${useCase.gradient}`}
                   >
