@@ -1,40 +1,11 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## RUPIX
+Rupix adalah platform pembayaran biometrik berbasis vena telapak tangan yang memungkinkan transaksi tanpa kartu, tanpa ponsel, dan tanpa input manual. Pengguna cukup menempelkan telapak tangan ke perangkat Rupix, sistem membaca pola vena unik, memverifikasi identitas dalam hitungan detik, lalu transaksi selesai.
 
-## Getting Started
+Teknologi yang digunakan mencakup Zero Knowledge cryptography dan blockchain-based hashing untuk melindungi data biometrik, dengan penyimpanan di infrastruktur Data Center Indonesia (DCI).
+Web app ini adalah antarmuka digital Rupix yang menghubungkan pengguna dengan akun, riwayat transaksi, dan manajemen identitas palm mereka.
 
-First, run the development server:
+Target pengguna adalah konsumen Indonesia sehari-hari di titik pembayaran seperti transportasi, ritel, F&B, dan event.
+Tagline resmi: Revolutionizing Payments, One Palm at a Time.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Kontak: hello@rupix.id | www.rupix.id | Jakarta, Indonesia
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# rupix-platform
-Identity-powered payment platform for seamless, secure, and scalable palm authentication.
-> 8475d0c7e32e5217990b3fa1311e4baca1c3ede6
