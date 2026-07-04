@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, ShoppingBag } from "lucide-react";
@@ -11,9 +12,13 @@ export function Hero() {
       className="relative overflow-hidden lg:min-h-screen"
       aria-labelledby="hero-heading"
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url(/hero.png)" }}
+      <Image
+        src="/hero.webp"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
         aria-hidden
       />
 

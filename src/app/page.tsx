@@ -1,11 +1,23 @@
+import dynamic from "next/dynamic";
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { TrustBar } from "@/components/sections/TrustBar";
-import { Features } from "@/components/sections/Features";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { UseCases } from "@/components/sections/UseCases";
-import { FAQ } from "@/components/sections/FAQ";
+
+const Features = dynamic(() =>
+  import("@/components/sections/Features").then((m) => m.Features)
+);
+const HowItWorks = dynamic(() =>
+  import("@/components/sections/HowItWorks").then((m) => m.HowItWorks)
+);
+const UseCases = dynamic(() =>
+  import("@/components/sections/UseCases").then((m) => m.UseCases)
+);
+const FAQ = dynamic(() =>
+  import("@/components/sections/FAQ").then((m) => m.FAQ)
+);
+const Footer = dynamic(() =>
+  import("@/components/layout/Footer").then((m) => m.Footer)
+);
 
 export default function HomePage() {
   return (

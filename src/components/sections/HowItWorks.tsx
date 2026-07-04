@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
-import work1Img from "../../../public/work1.png";
-import work2Img from "../../../public/work2.png";
-import work3Img from "../../../public/work3.png";
+import work1Img from "../../../public/work1.webp";
+import work2Img from "../../../public/work2.webp";
+import work3Img from "../../../public/work3.webp";
 
 const steps = [
   {

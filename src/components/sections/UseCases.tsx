@@ -5,12 +5,12 @@ import Image from "next/image";
 import { motion, useMotionValue, animate } from "framer-motion";
 
 const useCases = [
-  { title: "Minimarket", image: "/use1.png" },
-  { title: "Kantin Kampus", image: "/use2.png" },
-  { title: "Transportasi Umum", image: "/use3.png" },
-  { title: "Ritel Modern", image: "/use4.png" },
-  { title: "F&B Restoran", image: "/use5.png" },
-  { title: "Event & Hiburan", image: "/use6.png" },
+  { title: "Minimarket", image: "/use1.webp" },
+  { title: "Kantin Kampus", image: "/use2.webp" },
+  { title: "Transportasi Umum", image: "/use3.webp" },
+  { title: "Ritel Modern", image: "/use4.webp" },
+  { title: "F&B Restoran", image: "/use5.webp" },
+  { title: "Event & Hiburan", image: "/use6.webp" },
 ];
 
 const headerVariants = {
@@ -96,7 +96,6 @@ export function UseCases() {
                   fill
                   className="object-cover"
                   sizes="(max-width:640px) 55vw, (max-width:1024px) 45vw, 280px"
-                  unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <h3 className="absolute bottom-4 left-4 text-lg font-bold text-white sm:bottom-5 sm:left-5 sm:text-2xl">
@@ -115,7 +114,6 @@ export function UseCases() {
                   fill
                   className="object-cover"
                   sizes="(max-width:640px) 55vw, (max-width:1024px) 45vw, 280px"
-                  unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <h3 className="absolute bottom-4 left-4 text-lg font-bold text-white sm:bottom-5 sm:left-5 sm:text-2xl">

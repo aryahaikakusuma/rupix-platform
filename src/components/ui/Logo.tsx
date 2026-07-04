@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useSpring } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -50,15 +51,17 @@ export function Logo({ className, variant = "dark", size = "lg", progress = 0 }:
   return (
     <Link href="/" className={cn("block shrink-0", className)}>
       <div className={cn("relative overflow-hidden", sizeClasses[size])}>
-        <img
-          src="/logo.png"
+        <Image
+          src="/logo.webp"
           alt="Rupix"
           className={cn("h-full w-auto", colorClass)}
           style={{ opacity: logoOpacity }}
-          loading="eager"
+          priority
+          width={300}
+          height={64}
         />
         <motion.img
-          src="/icon.png"
+          src="/icon.webp"
           alt=""
           aria-hidden
           className={cn("absolute left-0 top-0 h-full w-auto", colorClass)}
