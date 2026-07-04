@@ -78,7 +78,7 @@ export function Features() {
   return (
     <section
       id="tentang"
-      className="bg-white py-20 lg:py-28"
+      className="bg-white pt-20 lg:pt-28 pb-16 lg:pb-24"
       aria-labelledby="features-heading"
     >
       <div className="section-container">
@@ -113,11 +113,11 @@ export function Features() {
 
         <div className="mt-14 lg:grid lg:grid-cols-[320px_1fr] lg:gap-12">
           {/* Desktop: vertical tab buttons (icon + title) */}
-          <Reveal delay={0.2} className="hidden lg:flex lg:flex-col lg:gap-0 lg:rounded-2xl lg:bg-neutral-100 lg:h-full">
+          <Reveal delay={0.2} className="hidden lg:block lg:h-full">
             <div
               role="tablist"
               aria-label="Fitur"
-              className="contents"
+              className="flex flex-col gap-0 rounded-2xl bg-neutral-100 h-full"
             >
               {features.map((f, i) => {
                 const isActive = i === active;
@@ -126,7 +126,9 @@ export function Features() {
                   <button
                     key={f.title}
                     role="tab"
+                    id={`features-tab-${i}`}
                     aria-selected={isActive}
+                    aria-controls={`features-panel`}
                     onClick={() => handleTabClick(i)}
                     className={`flex flex-1 items-center gap-4 px-5 py-5 text-left transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset ${
                       isActive
@@ -152,7 +154,9 @@ export function Features() {
           <Reveal delay={0.3} className="mt-8 lg:mt-0">
             <div className="flex flex-col">
               {/* Content panel */}
-              <div className="flex flex-col justify-center overflow-hidden rounded-2xl bg-neutral-50 p-8 sm:p-10 h-[480px] lg:p-12">
+              <div                role="tabpanel"
+               aria-labelledby={`features-tab-${active}`}
+               className="flex flex-col justify-center overflow-hidden rounded-2xl bg-neutral-50 p-8 sm:p-10 h-[480px] lg:p-12">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={active}

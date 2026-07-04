@@ -60,14 +60,19 @@ export function Logo({ className, variant = "dark", size = "lg", progress = 0 }:
           width={300}
           height={64}
         />
-        <motion.img
-          src="/icon.webp"
-          alt=""
+        <motion.div
           aria-hidden
-          className={cn("absolute left-0 top-0 h-full w-auto", colorClass)}
+          className={cn("absolute inset-0", colorClass)}
           style={{ x: smoothX, opacity: iconOpacity }}
-          loading="eager"
-        />
+        >
+          <Image
+            src="/icon.webp"
+            alt=""
+            fill
+            className="object-contain object-left"
+            sizes="(max-width: 1024px) 56px, 64px"
+          />
+        </motion.div>
       </div>
     </Link>
   );

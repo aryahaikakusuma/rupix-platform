@@ -12,14 +12,24 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rupix.id"),
   title: "Rupix — Pembayaran Biometrik Telapak Tangan",
   description:
     "Verifikasi identitas dan bayar dengan telapak tangan. Tanpa kartu, tanpa HP, tanpa kontak fisik. Alternatif QRIS yang lebih cepat dan aman.",
+  robots: "index, follow",
   openGraph: {
-    title: "Rupix — Revolutionizing Payments, One Palm at a Time",
+    title: "Rupix — Pembayaran Biometrik Telapak Tangan",
     description:
-      "Pembayaran biometrik berbasis palm vein recognition untuk Indonesia.",
+      "Verifikasi identitas dan bayar dengan telapak tangan. Tanpa kartu, tanpa HP, tanpa kontak fisik.",
     type: "website",
+    locale: "id_ID",
+    siteName: "Rupix",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rupix — Pembayaran Biometrik Telapak Tangan",
+    description:
+      "Verifikasi identitas dan bayar dengan telapak tangan. Tanpa kartu, tanpa HP, tanpa kontak fisik.",
   },
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
@@ -17,6 +17,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -34,6 +36,52 @@ export function Navbar() {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [mobileOpen]);
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (!mobileOpen) return;
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        buttonRef.current?.focus();
+        return;
+      }
+      if (e.key === "Tab") {
+        const menu = menuRef.current;
+        if (!menu) return;
+        const focusable = menu.querySelectorAll<HTMLElement>(
+          'a, button, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    },
+    [mobileOpen]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      const menu = menuRef.current;
+      if (menu) {
+        const first = menu.querySelector<HTMLElement>(
+          'a, button, [tabindex]:not([tabindex="-1"])'
+        );
+        first?.focus();
+      }
+    }
   }, [mobileOpen]);
 
   const isSolid = scrolled || mobileOpen;
@@ -71,13 +119,14 @@ export function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Button variant="secondary" href="#" className="text-lg">
+          <Button variant="secondary" className="text-lg">
             Sign In
           </Button>
           <Button href="/daftar" className="text-lg">Daftar Biometrik</Button>
         </div>
 
         <button
+          ref={buttonRef}
           type="button"
           className={cn(
             "inline-flex h-11 w-11 items-center justify-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary md:hidden",
@@ -85,6 +134,7 @@ export function Navbar() {
           )}
           aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
           aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -92,7 +142,14 @@ export function Navbar() {
       </nav>
 
       {mobileOpen && (
-        <div className="border-t border-neutral-200 bg-white px-4 py-6 md:hidden">
+        <div
+          id="mobile-menu"
+          ref={menuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu navigasi"
+          className="border-t border-neutral-200 bg-white px-4 py-6 md:hidden"
+        >
           <ul className="space-y-4">
             {navLinks.map((link) => (
               <li key={link.href}>
@@ -107,7 +164,7 @@ export function Navbar() {
             ))}
           </ul>
           <div className="mt-6 flex flex-col gap-3">
-            <Button variant="secondary" href="#" className="w-full text-lg">
+            <Button variant="secondary" className="w-full text-lg">
               Sign In
             </Button>
             <Button href="/daftar" className="w-full text-lg">

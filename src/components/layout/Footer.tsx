@@ -66,7 +66,7 @@ export function Footer() {
           </div>
         </motion.div>
 
-        <div className="mt-2 lg:mt-16">
+        <div className="mt-0 lg:mt-2">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
             <div className="lg:col-span-1">
               <Logo variant="light" />

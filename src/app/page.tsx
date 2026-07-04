@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { TrustBar } from "@/components/sections/TrustBar";
@@ -19,6 +20,10 @@ const Footer = dynamic(() =>
   import("@/components/layout/Footer").then((m) => m.Footer)
 );
 
+function SectionFallback() {
+  return <div className="h-64 animate-pulse bg-neutral-100" />;
+}
+
 export default function HomePage() {
   return (
     <>
@@ -26,12 +31,22 @@ export default function HomePage() {
       <main>
         <Hero />
         <TrustBar />
-        <Features />
-        <HowItWorks />
-        <UseCases />
-        <FAQ />
+        <Suspense fallback={<SectionFallback />}>
+          <Features />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <HowItWorks />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <UseCases />
+        </Suspense>
+        <Suspense fallback={<SectionFallback />}>
+          <FAQ />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={<SectionFallback />}>
+        <Footer />
+      </Suspense>
     </>
   );
 }
