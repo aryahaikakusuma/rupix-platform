@@ -62,4 +62,5 @@ next-env.d.ts
 .impeccable/live/pending-manual-edits.json
 .impeccable/live/deferred-svelte-component-accepts.json
 .impeccable/live/*.png
+.cursor
 # impeccable-ignore-end
