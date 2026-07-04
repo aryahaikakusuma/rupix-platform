@@ -80,8 +80,10 @@ export function HowItWorks() {
         <div className="mt-14 grid gap-8 md:grid-cols-3">
           {steps.map((step, i) => (
             <Reveal key={step.title} delay={i * 0.1} className="flex">
-              <div
-                className="flex w-full flex-col rounded-2xl border border-neutral-200/80 bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-700/30"
+              <motion.div
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="flex w-full flex-col rounded-2xl border border-neutral-300 bg-white drop-shadow-[0_4px_8px_rgba(82,113,255,0.12)] transition-all duration-300 ease-out hover:border-neutral-400 hover:drop-shadow-[0_12px_24px_rgba(82,113,255,0.25)]"
               >
                 <div className="flex flex-1 flex-col p-6 pb-0">
                   <h3 className="text-xl font-bold text-neutral-900">
@@ -100,7 +102,7 @@ export function HowItWorks() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
-              </div>
+              </motion.div>
             </Reveal>
           ))}
         </div>

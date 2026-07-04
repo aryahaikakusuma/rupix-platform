@@ -8,7 +8,7 @@ export function Hero() {
   return (
     <section
       id="produk"
-      className="relative min-h-screen overflow-hidden"
+      className="relative overflow-hidden lg:min-h-screen"
       aria-labelledby="hero-heading"
     >
       <div
@@ -43,15 +43,19 @@ export function Hero() {
         </div>
       </motion.div>
 
-      <div className="section-container relative z-10 flex min-h-screen flex-col pb-16 pt-24 sm:pb-12 sm:pt-32 lg:grid lg:grid-cols-2 lg:items-start lg:gap-16 lg:pb-20 lg:pt-24">
+      <div className="section-container relative z-10 flex flex-col pb-16 pt-24 sm:pb-12 sm:pt-32 lg:grid lg:grid-cols-2 lg:items-start lg:gap-16 lg:pb-20 lg:pt-24 lg:min-h-screen">
         <motion.h1
           id="hero-heading"
           initial={{ opacity: 0, y: 36 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="max-w-2xl text-left text-[clamp(1.75rem,3.75vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-white text-balance [text-shadow:0_2px_12px_rgba(0,0,0,0.4)]"
+          className="max-w-2xl text-left text-[clamp(2.25rem,4.5vw,3.75rem)] font-bold leading-[1.1] tracking-tight text-white text-balance [text-shadow:0_2px_12px_rgba(0,0,0,0.4)]"
         >
-          Satu Telapak Tangan untuk Semua Transaksi
+          Satu Telapak Tangan{" "}
+          <br />
+          untuk Semua{" "}
+          <br />
+          Transaksi
         </motion.h1>
 
         <div className="mt-16 flex flex-col items-start gap-4 self-end lg:mt-0 lg:items-end lg:text-right">

@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useMotionValue, animate } from "framer-motion";
 
 const useCases = [
   { title: "Minimarket", image: "/use1.png" },
@@ -28,73 +28,64 @@ const slideUp = {
 };
 
 export function UseCases() {
-  const controls = useAnimation();
-  const isDragging = useRef(false);
   const constraintsRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const currentXPxRef = useRef(-50);
+  const x = useMotionValue(0);
+  const isDragging = useRef(false);
+  const animRef = useRef<ReturnType<typeof animate> | null>(null);
   const BASE_DURATION = 18;
 
-  const readTranslateX = (transform: string): number => {
-    let m = transform.match(/translateX\(([\d.-]+)/);
-    if (m) return parseFloat(m[1]);
-    m = transform.match(/translate3d\(([\d.-]+)/);
-    if (m) return parseFloat(m[1]);
-    m = transform.match(/matrix\(([^)]+)\)/);
-    if (m) return parseFloat(m[1].split(",")[4]) || 0;
-    return currentXPxRef.current;
-  };
-
   const startLoop = useCallback(() => {
-    controls.start({
-      x: "0%",
-      transition: { ease: "linear", duration: BASE_DURATION },
-    }).then(() => {
-      if (!isDragging.current) {
-        controls.set({ x: "-50%" });
-        startLoop();
-      }
+    const el = trackRef.current;
+    if (!el) return;
+
+    animRef.current?.stop();
+    animRef.current = animate(x, 0, {
+      type: "tween",
+      ease: "linear",
+      duration: BASE_DURATION,
+      onComplete: () => {
+        if (!isDragging.current) {
+          x.set(-el.scrollWidth / 2);
+          startLoop();
+        }
+      },
     });
-  }, [controls]);
+  }, [x]);
 
   useEffect(() => {
+    const el = trackRef.current;
+    if (el) x.set(-el.scrollWidth / 2);
     startLoop();
-    return () => {
-      controls.stop();
-    };
-  }, [startLoop, controls]);
+    return () => animRef.current?.stop();
+  }, [startLoop, x]);
 
   const handleDragStart = () => {
     isDragging.current = true;
-    controls.stop();
-    const el = trackRef.current;
-    if (el) currentXPxRef.current = readTranslateX(el.style.transform);
-  };
-
-  const handleDrag = () => {
-    const el = trackRef.current;
-    if (el) currentXPxRef.current = readTranslateX(el.style.transform);
+    animRef.current?.stop();
   };
 
   const handleDragEnd = () => {
     isDragging.current = false;
     const el = trackRef.current;
-    if (!el) { startLoop(); return; }
+    if (!el) return;
 
-    const px = currentXPxRef.current;
-    const width = el.scrollWidth;
-    const currentXPct = width > 0 ? (px / width) * 100 : -50;
-    const fraction = Math.max(0, Math.min(1, (currentXPct + 50) / 50));
-    const duration = Math.max((1 - fraction) * BASE_DURATION, 0.3);
+    const currentX = x.get();
+    const halfWidth = el.scrollWidth / 2;
+    const remaining = Math.abs(currentX) / halfWidth;
+    const duration = Math.max(remaining * BASE_DURATION, 0.3);
 
-    controls.start({
-      x: "0%",
-      transition: { ease: "linear", duration },
-    }).then(() => {
-      if (!isDragging.current) {
-        controls.set({ x: "-50%" });
-        startLoop();
-      }
+    animRef.current?.stop();
+    animRef.current = animate(x, 0, {
+      type: "tween",
+      ease: "linear",
+      duration,
+      onComplete: () => {
+        if (!isDragging.current) {
+          x.set(-el.scrollWidth / 2);
+          startLoop();
+        }
+      },
     });
   };
 
@@ -133,30 +124,29 @@ export function UseCases() {
         <div ref={constraintsRef} className="mt-14 w-full overflow-hidden">
           <motion.div
             ref={trackRef}
-            className="flex cursor-grab gap-6 active:cursor-grabbing"
+            style={{ x }}
+            className="flex cursor-grab gap-4 active:cursor-grabbing sm:gap-6"
             drag="x"
             dragConstraints={constraintsRef}
-            dragElastic={0.2}
+            dragElastic={0.1}
             onDragStart={handleDragStart}
-            onDrag={handleDrag}
             onDragEnd={handleDragEnd}
-            animate={controls}
           >
             {allCards.map((item, i) => (
               <div
                 key={`${item.title}-${i}`}
-                className="relative aspect-[3/4] w-[75vw] shrink-0 overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-800 to-neutral-900 sm:w-[45vw] lg:w-[300px]"
+                className="relative aspect-[4/5] w-[55vw] shrink-0 overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-800 to-neutral-900 sm:w-[45vw] sm:aspect-[3/4] lg:w-[280px]"
               >
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
                   className="object-cover"
-                  sizes="(max-width:640px) 75vw, (max-width:1024px) 45vw, 300px"
+                  sizes="(max-width:640px) 55vw, (max-width:1024px) 45vw, 280px"
                   unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <h3 className="absolute bottom-5 left-5 text-2xl font-bold text-white">
+                <h3 className="absolute bottom-4 left-4 text-lg font-bold text-white sm:bottom-5 sm:left-5 sm:text-2xl">
                   {item.title}
                 </h3>
               </div>
